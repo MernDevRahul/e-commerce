@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import viteLogo from '/vite.svg'
-import Signup from './pages/user/signup'
+import Signup from './pages/user/Signup'
 import { Route, Routes } from 'react-router-dom'
 import Login from './pages/user/login'
 import Navbar from './components/Navbar'
