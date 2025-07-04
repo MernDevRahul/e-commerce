@@ -28,26 +28,15 @@ const Navbar = ({search, setSearch}) => {
     navigate('/');
   };
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    // You can dispatch or navigate with search query
-    console.log('Search:', search);
-    // navigate(`/search?q=${search}`);
-  };
-
   return (
     <nav className="bg-white shadow-md px-4 py-3">
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-        
-        {/* Left: Home + Search Bar */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-6 w-full sm:w-auto">
           <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate('/home')}>
             <FiHome className="text-indigo-600 text-2xl" />
             <span className="text-xl font-bold text-indigo-700">Home</span>
           </div>
-
-          {/* Search Bar */}
-          <form onSubmit={handleSearch} className="mt-3 sm:mt-0">
+          <form className="mt-3 sm:mt-0">
             <input
               type="text"
               value={search}
@@ -57,10 +46,7 @@ const Navbar = ({search, setSearch}) => {
             />
           </form>
         </div>
-
-        {/* Right: Icons and Buttons */}
         <div className="flex items-center space-x-6">
-          {/* User Icon & Dropdown */}
           <div className="relative" ref={dropdownRef}>
             <button
               className="relative group hover:text-indigo-600 transition"
@@ -81,8 +67,6 @@ const Navbar = ({search, setSearch}) => {
               </div>
             )}
           </div>
-
-          {/* Admin: Add Product */}
           {user && user.role === 'admin' ? (
             <button
               className="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition"
@@ -91,7 +75,6 @@ const Navbar = ({search, setSearch}) => {
               Add Product
             </button>
           ) : (
-            // Cart Icon
             <button
               className="relative group hover:text-indigo-600 transition"
               onClick={() => navigate('/cart')}

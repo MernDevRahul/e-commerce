@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchCart } from '../store/slice/cartSlice';
 import { FaTrash } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
+import axios from '../utils/axios';
 
 const Cart = () => {
   const { cart, loading } = useSelector((state) => state.cart);
@@ -13,9 +14,12 @@ const Cart = () => {
     dispatch(fetchCart());
   }, [dispatch]);
 
-  const removeItem = (id) => {
-    console.warn("Remove item logic not implemented.");
-  };
+  const removeItem = async (id) => {
+      const res = await axios.delete(`/cart/remove/${id}`)
+      if(res.status==200){
+        dispatch(fetchCart());
+      }
+      };
 
   const handlePlaceOrder = () => {
     navigate("/order")

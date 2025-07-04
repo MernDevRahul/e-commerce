@@ -38,6 +38,19 @@ exports.removeFromCart = async (req, res) => {
         res.status(500).json({ message: "Server error", error: error.message });
     }
 }
+exports.removeById = async (req, res) => {
+    const id = req.params.id
+    try {
+        const deletedItem = await Cart.findByIdAndDelete(id);
+        if (deletedItem) {
+            return res.status(200).json({ message: "Product removed from cart", deletedItem });
+        } else {
+            return res.status(404).json({ message: "Product not found in cart" });
+        }
+    } catch (error) {
+        res.status(500).json({ message: "Server error", error: error.message });
+    }
+}
 
 exports.updateCart = async(req,res)=>{
     const userId = req.user.id;
