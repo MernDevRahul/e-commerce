@@ -7,7 +7,7 @@ import axios from '../utils/axios';
 import { fetchCart } from '../store/slice/cartSlice';
 
 
-const Main = () => {
+const Main = ({search}) => {
   const dispatch = useDispatch();
   const {products} = useSelector((state)=> state.product)
   useEffect(()=>{
@@ -30,12 +30,14 @@ if (token) {
     }
   };
 
+  const filterProducts = products.filter(product=>product.name.toLowerCase().includes(search.toLowerCase()));
+
   return (
     <div className="p-4 max-w-7xl mx-auto">
       <h1 className="text-3xl font-bold text-indigo-700 mb-6 text-center">Our Products</h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {products?.map((product) => (
+        {filterProducts?.map((product) => (
           <div
             key={product._id}
             className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition"

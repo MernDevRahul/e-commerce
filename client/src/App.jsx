@@ -10,7 +10,7 @@ import Signup from './pages/Signup'
 
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [search, setSearch] = useState("")
 
   return (
     <Routes>
@@ -18,8 +18,8 @@ function App() {
       <Route path='/signup' element={<Signup/>}/>
       <Route path='/home' element={
         <>
-        <Navbar/>
-        <Main/>
+        <Navbar search={search} setSearch={setSearch}/>
+        <Main search={search} setSearch={setSearch}/>
         </>
         }/>
       <Route path='/add-product' element={
