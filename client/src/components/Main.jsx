@@ -24,8 +24,9 @@ const Main = ({ search }) => {
     } finally {
       setLoading(false);
     }
-  }, []);
+  },[]);
   const handleAddToCart = async (id) => {
+    setLoading(true)
     try {
       const res = await axios.post("/cart/add", { id });
       if (res.status == 200) {
@@ -34,6 +35,8 @@ const Main = ({ search }) => {
       }
     } catch (error) {
       toast.error("Failed to add");
+    }finally{
+      setLoading(false)
     }
   };
 

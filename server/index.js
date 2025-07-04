@@ -6,6 +6,7 @@ const userRoutes = require("./routes/authRoutes")
 const productRoutes = require("./routes/productRoutes")
 const cartRoutes = require('./routes/cartRoutes')
 const orderRoutes = require('./routes/orderRoutes')
+const path = require('path');
 dotenv.config();
 
 const app = express();
@@ -14,6 +15,11 @@ app.use(cors())
 app.use(express.json());
 
 connectDB();
+
+app.use(express.static(path.join(__dirname, 'build')));
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  });
 
 app.get('/',(req,res)=>{
     res.send("Hello Backend")
