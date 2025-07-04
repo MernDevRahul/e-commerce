@@ -1,10 +1,12 @@
 import axios from "../utils/axios";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Order = () => {
   const {user} = useSelector((state) => state.auth);
   const {cart} = useSelector((state) => state.cart);
+  const navigate = useNavigate()
 
   const [address, setAddress] = useState("");
 
@@ -27,6 +29,7 @@ const Order = () => {
       if (response.status === 200) {
         await axios.delete('/cart/remove');
         setAddress("");
+        navigate('/home')
         // Optionally: clear cart from Redux
         // dispatch(clearCart());
       }

@@ -15,6 +15,7 @@ const Main = () => {
 if (token) {
   dispatch(fetchCurrentUser());
   dispatch(fetchProducts())
+  dispatch(fetchCart())
 }
   },[])  
    const handleAddToCart = async (id) => {
