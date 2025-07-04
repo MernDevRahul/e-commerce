@@ -30,7 +30,7 @@ if (token) {
     }
   };
 
-  const filterProducts = products.filter(product=>product.name.toLowerCase().includes(search.toLowerCase()));
+  const filterProducts = products?.filter(product=>product.name.toLowerCase().includes(search.toLowerCase()));
 
   return (
     <div className="p-4 max-w-7xl mx-auto">
