@@ -93,7 +93,7 @@ const Signup = () => {
 
         <p className="mt-6 text-center text-sm text-gray-600">
           Already have an account?{' '}
-          <a href="/login" className="text-indigo-600 hover:underline font-semibold">
+          <a className="text-indigo-600 hover:underline font-semibold" onClick={()=>navigate("/")}>
             Log in
           </a>
         </p>
