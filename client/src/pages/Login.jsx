@@ -1,7 +1,7 @@
 import axios from '../utils/axios';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { fetchCurrentUser } from '../../store/slice/authSlice';
+import { fetchCurrentUser } from '../store/slice/authSlice';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
