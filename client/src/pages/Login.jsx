@@ -9,6 +9,7 @@ const Login = () => {
         email: '',
         password: ''
       });
+      const [loading,setLoading] = useState(false)
       const dispatch = useDispatch();
       const navigate = useNavigate();
  
@@ -19,10 +20,17 @@ const Login = () => {
     
       const handleSubmit = async (e) => {
         e.preventDefault();
-        const res = await axios.post("/auth/login",formData)
-        localStorage.setItem('token', res.data.token);
-        dispatch(fetchCurrentUser())
-        navigate("/home")
+        setLoading(true);
+        try {
+          const res = await axios.post("/auth/login", formData);
+          localStorage.setItem('token', res.data.token);
+          dispatch(fetchCurrentUser());
+          navigate("/home");
+        } catch (error) {
+          console.error(error);
+        } finally {
+          setLoading(false);
+        }
       };
     
       return (
@@ -61,8 +69,9 @@ const Login = () => {
                 <button
                   type="submit"
                   className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 rounded-lg transition-all shadow-md hover:shadow-lg focus:ring-2 focus:ring-indigo-500"
+                  disabled={loading}
                 >
-                  Log In
+                  {loading ? "Logging in..." : "Log In"}
                 </button>
               </div>
             </form>

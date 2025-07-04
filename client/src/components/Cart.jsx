@@ -5,7 +5,7 @@ import { FaTrash } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
-  const { cart } = useSelector((state) => state.cart);
+  const { cart, loading } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -31,7 +31,16 @@ const Cart = () => {
       <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-md p-6">
         <h2 className="text-2xl font-bold text-indigo-700 mb-6 text-center">Your Cart</h2>
 
-        {cart?.length === 0 ? (
+        {loading ? (
+          <div className='main'>
+            <div className="loading-wave">
+          <div className="loading-bar"></div>
+          <div className="loading-bar"></div>
+          <div className="loading-bar"></div>
+          <div className="loading-bar"></div>
+        </div>
+          </div>
+        ) : cart?.length === 0 ? (
           <p className="text-center text-gray-600">Your cart is empty.</p>
         ) : (
           <div className="space-y-6">
