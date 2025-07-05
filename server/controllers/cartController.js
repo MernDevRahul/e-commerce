@@ -28,7 +28,7 @@ exports.addToCart = async (req,res)=>{
 exports.removeFromCart = async (req, res) => {
     const userId = req.user.id
     try {
-        const deletedItem = await Cart.findOneAndDelete({ userId });
+        const deletedItem = await Cart.deleteMany({ userId });
         if (deletedItem) {
             return res.status(200).json({ message: "Product removed from cart", deletedItem });
         } else {
