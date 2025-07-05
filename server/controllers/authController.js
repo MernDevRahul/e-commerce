@@ -46,6 +46,40 @@ exports.login = async(req,res)=>{
     }
 }
 
+exports.googleLogin = async(req,res)=>{
+    try {
+        const { email, firstName, lastName, googleId } = req.body;
+        let user = await User.findOne({ email });
+        
+        if (!user) {
+            user = new User({
+                email,
+                firstName,
+                lastName,
+                googleId,
+            });
+            await user.save();
+        } else if (!user.googleId) {
+            user.googleId = googleId;
+            if (!user.firstName) user.firstName = firstName;
+            if (!user.lastName) user.lastName = lastName;
+            await user.save();
+        }
+        
+        const token = jwt.sign({id:user._id,email:user.email},process.env.SECRET);
+        res.status(200).json({
+            token,
+            user:{
+                id:user._id,
+                firstName:user.firstName,
+                email:user.email,
+            }
+        });
+    } catch (error) {
+        res.status(500).json({message:"Server error",error:error.message})
+    }
+}
+
 exports.getUser = async(req,res)=>{
     const userId = req.user.id;
     try {
