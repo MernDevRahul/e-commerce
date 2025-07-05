@@ -39,17 +39,13 @@ const Login = () => {
     setLoading(true)
     try {
       const decoded = JSON.parse(atob(credentialResponse.credential.split('.')[1]));
-      console.log(decoded);
       
       const googleUserData = {
         email: decoded.email,
         firstName: decoded.given_name,
         lastName: decoded.family_name,
         googleId: decoded.sub
-      };
-      console.log(googleUserData);
-      
-
+      };      
       const res = await axios.post("/auth/google", googleUserData);
       console.log(res);
       
