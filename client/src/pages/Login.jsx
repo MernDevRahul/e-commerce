@@ -48,7 +48,7 @@ const Login = () => {
         googleId: decoded.sub
       };
 
-      const res = await axios.post("/auth/google", googleUserData);
+      const res = await axios.post("api/auth/google", googleUserData);
       localStorage.setItem('token', res.data.token);
       dispatch(fetchCurrentUser());
       navigate("/home");
